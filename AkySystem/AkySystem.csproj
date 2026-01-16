@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+        <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
@@ -46,12 +46,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<!-- Включаем тримминг -->
-		<PublishTrimmed>true</PublishTrimmed>
+		<PublishTrimmed>false</PublishTrimmed>
 		<TrimMode>link</TrimMode>
 		<!-- для MAUI/Android это по умолчанию, но лучше указать явно -->
 
 		<!-- Включаем AOT для Android -->
-		<RunAOTCompilation>true</RunAOTCompilation>
+		<RunAOTCompilation>false</RunAOTCompilation>
 
 		<!-- Опционально, если нужно ужимать ещё сильнее -->
 		<AndroidLinkMode>Full</AndroidLinkMode>
@@ -61,8 +61,8 @@
 		<AndroidKeyStore>True</AndroidKeyStore>
 		<AndroidSigningKeyStore>akysystem.keystore</AndroidSigningKeyStore>
 		<AndroidSigningKeyAlias>akysystemkey</AndroidSigningKeyAlias>
-		<AndroidSigningKeyPass>AkyFamily</AndroidSigningKeyPass>
-		<AndroidSigningStorePass>AkyFamily</AndroidSigningStorePass>
+		<AndroidSigningKeyPass>AkyFamily_09</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>AkyFamily_09</AndroidSigningStorePass>
 	</PropertyGroup>
 
 
