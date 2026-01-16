@@ -6,14 +6,14 @@ namespace AkySystem.Data
 {
     public class SeedDataService
     {
-        private readonly ProjectRepository _projectRepository;
+        private readonly DataProjectRepository _projectRepository;
         private readonly TaskRepository _taskRepository;
         private readonly TagRepository _tagRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly string _seedDataFilePath = "SeedData.json";
         private readonly ILogger<SeedDataService> _logger;
 
-        public SeedDataService(ProjectRepository projectRepository, TaskRepository taskRepository, TagRepository tagRepository, CategoryRepository categoryRepository, ILogger<SeedDataService> logger)
+        public SeedDataService(DataProjectRepository projectRepository, TaskRepository taskRepository, TagRepository tagRepository, CategoryRepository categoryRepository, ILogger<SeedDataService> logger)
         {
             _projectRepository = projectRepository;
             _taskRepository = taskRepository;

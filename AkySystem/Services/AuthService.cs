@@ -1,28 +1,45 @@
-﻿namespace AkySystem.Services;
+﻿using Microsoft.Maui.Storage;
+using AkySystem.Models;           // для User
+using System.Threading.Tasks;     // для Task
+using AkySystem.Services;         // для DatabaseService
 
-public class AuthService
+namespace AkySystem.Services
 {
-    // Проверка, зарегистрирован ли кто-то
-    public bool IsUserRegistered() => Preferences.Default.Get("is_registered", false);
-
-    // Проверка, вошел ли пользователь
-    public bool IsSessionActive() => Preferences.Default.Get("is_logged_in", false);
-
-    // Вход (теперь принимает логин и пароль, чтобы не было ошибок)
-    public void Login(string username, string password)
+    public class AuthService
     {
-        Preferences.Default.Set("is_logged_in", true);
-    }
+        private readonly DatabaseService _dbService;
 
-    // Регистрация (добавили этот метод)
-    public void Register(string username, string password)
-    {
-        Preferences.Default.Set("is_registered", true);
-        Preferences.Default.Set("is_logged_in", true); // Сразу входим после регистрации
-    }
+        public AuthService(DatabaseService dbService)
+        {
+            _dbService = dbService;
+        }
 
-    public void Logout()
-    {
-        Preferences.Default.Set("is_logged_in", false);
+        public async Task<bool> Register(string username, string password)
+        {
+            var existingUser = await _dbService.GetUserAsync(username);
+            if (existingUser != null)
+                return false;
+
+            await _dbService.AddUserAsync(new User { Login = username, Password = password });
+            Microsoft.Maui.Storage.Preferences.Default.Set("is_registered", true);
+            Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", true);
+            return true;
+        }
+
+        public async Task<bool> Login(string login, string password)
+        {
+            var user = await _dbService.GetUserAsync(login);
+            if (user != null && user.Password == password)
+            {
+                Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", true);
+                return true;
+            }
+            return false;
+        }
+
+        public void Logout()
+        {
+            Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", false);
+        }
     }
 }

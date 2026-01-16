@@ -11,7 +11,7 @@ namespace AkySystem.PageModels
         public const string ProjectQueryKey = "project";
         private ProjectTask? _task;
         private bool _canDelete;
-        private readonly ProjectRepository _projectRepository;
+        private readonly DataProjectRepository _projectRepository;
         private readonly TaskRepository _taskRepository;
         private readonly ModalErrorHandler _errorHandler;
 
@@ -34,7 +34,7 @@ namespace AkySystem.PageModels
         [ObservableProperty]
         private bool _isExistingProject;
 
-        public TaskDetailPageModel(ProjectRepository projectRepository, TaskRepository taskRepository, ModalErrorHandler errorHandler)
+        public TaskDetailPageModel(DataProjectRepository projectRepository, TaskRepository taskRepository, ModalErrorHandler errorHandler)
         {
             _projectRepository = projectRepository;
             _taskRepository = taskRepository;

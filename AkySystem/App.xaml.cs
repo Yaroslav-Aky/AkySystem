@@ -28,11 +28,11 @@
                 DateTime lastExit = Preferences.Get("LastExitTime", DateTime.Now);
                 TimeSpan diff = DateTime.Now - lastExit;
 
-                if (diff.TotalMinutes >= 30)
+                if (diff.TotalMinutes > 30)
                 {
-                    // Если у вас там создается экземпляр сервиса:
-                    var authService = new AkySystem.Services.AuthService();
-                    authService.Logout();
+                    // Получаем AuthService через DI
+                    var authService = ServiceHelper.GetService<AuthService>();
+                    authService?.Logout();
                 }
             }
         }

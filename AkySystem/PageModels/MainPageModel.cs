@@ -1,14 +1,15 @@
 using AkySystem.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+using AkySystem.Data;
 namespace AkySystem.PageModels
 {
     public partial class MainPageModel : ObservableObject, IProjectTaskPageModel
     {
+
         private bool _isNavigatedTo;
         private bool _dataLoaded;
-        private readonly ProjectRepository _projectRepository;
+        private readonly DataProjectRepository _projectRepository;
         private readonly TaskRepository _taskRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly ModalErrorHandler _errorHandler;
@@ -38,7 +39,7 @@ namespace AkySystem.PageModels
         public bool HasCompletedTasks
             => Tasks?.Any(t => t.IsCompleted) ?? false;
 
-        public MainPageModel(SeedDataService seedDataService, ProjectRepository projectRepository,
+        public MainPageModel(SeedDataService seedDataService, DataProjectRepository projectRepository,
             TaskRepository taskRepository, CategoryRepository categoryRepository, ModalErrorHandler errorHandler)
         {
             _projectRepository = projectRepository;

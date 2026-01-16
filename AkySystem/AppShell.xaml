@@ -17,6 +17,14 @@
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="False" />
 
+    <ShellContent
+    Title="Login"
+    ContentTemplate="{DataTemplate pages:LoginPage}"
+    Route="LoginPage"
+    FlyoutItemIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False" />
+
     <!-- Основная страница приложения -->
     <ShellContent
     Title="Home"

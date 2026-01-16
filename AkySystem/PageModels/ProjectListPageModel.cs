@@ -9,12 +9,12 @@ namespace AkySystem.PageModels
 {
     public partial class ProjectListPageModel : ObservableObject
     {
-        private readonly ProjectRepository _projectRepository;
+        private readonly DataProjectRepository _projectRepository;
 
         [ObservableProperty]
         private List<Project> _projects = [];
 
-        public ProjectListPageModel(ProjectRepository projectRepository)
+        public ProjectListPageModel(DataProjectRepository projectRepository)
         {
             _projectRepository = projectRepository;
         }

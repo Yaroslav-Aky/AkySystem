@@ -7,7 +7,7 @@ namespace AkySystem.Data
     /// <summary>
     /// Repository class for managing projects in the database.
     /// </summary>
-    public class ProjectRepository
+    public class DataProjectRepository
     {
         private bool _hasBeenInitialized = false;
         private readonly ILogger _logger;
@@ -15,12 +15,12 @@ namespace AkySystem.Data
         private readonly TagRepository _tagRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectRepository"/> class.
+        /// Initializes a new instance of the <see cref="DataProjectRepository"/> class.
         /// </summary>
         /// <param name="taskRepository">The task repository instance.</param>
         /// <param name="tagRepository">The tag repository instance.</param>
         /// <param name="logger">The logger instance.</param>
-        public ProjectRepository(TaskRepository taskRepository, TagRepository tagRepository, ILogger<ProjectRepository> logger)
+        public DataProjectRepository(TaskRepository taskRepository, TagRepository tagRepository, ILogger<DataProjectRepository> logger)
         {
             _taskRepository = taskRepository;
             _tagRepository = tagRepository;

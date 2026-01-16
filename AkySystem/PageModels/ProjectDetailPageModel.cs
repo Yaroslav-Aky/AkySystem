@@ -7,7 +7,7 @@ namespace AkySystem.PageModels
     public partial class ProjectDetailPageModel : ObservableObject, IQueryAttributable, IProjectTaskPageModel
     {
         private Project? _project;
-        private readonly ProjectRepository _projectRepository;
+        private readonly DataProjectRepository _projectRepository;
         private readonly TaskRepository _taskRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly TagRepository _tagRepository;
@@ -55,7 +55,7 @@ namespace AkySystem.PageModels
         public bool HasCompletedTasks
             => _project?.Tasks.Any(t => t.IsCompleted) ?? false;
 
-        public ProjectDetailPageModel(ProjectRepository projectRepository, TaskRepository taskRepository, CategoryRepository categoryRepository, TagRepository tagRepository, ModalErrorHandler errorHandler)
+        public ProjectDetailPageModel(DataProjectRepository projectRepository, TaskRepository taskRepository, CategoryRepository categoryRepository, TagRepository tagRepository, ModalErrorHandler errorHandler)
         {
             _projectRepository = projectRepository;
             _taskRepository = taskRepository;
