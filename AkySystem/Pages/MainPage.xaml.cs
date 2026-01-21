@@ -13,8 +13,9 @@ public partial class MainPage : ContentPage
     // Это сработает, когда нажмешь "Перевести"
     private async void OnTransferClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Перевод", "Скоро здесь будет меню перевода!", "ОК");
+        await Navigation.PushAsync(new AkySystem.Pages.TransferPage());
     }
+
 
     // Это сработает, когда нажмешь "Магазин"
     private async void OnShopClicked(object sender, EventArgs e)

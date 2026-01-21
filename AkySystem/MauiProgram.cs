@@ -27,6 +27,8 @@ namespace AkySystem
                     fonts.AddFont("SegoeUI-Semibold.ttf", "SegoeSemibold");
                     fonts.AddFont("FluentSystemIcons-Regular.ttf", FluentUI.FontFamily);
                 });
+            System.Diagnostics.Debug.WriteLine(AkySystem.Data.Constants.DatabasePath);
+
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -46,6 +48,10 @@ namespace AkySystem
             builder.Services.AddSingleton<MainPageModel>();
             builder.Services.AddSingleton<ProjectListPageModel>();
             builder.Services.AddSingleton<ManageMetaPageModel>();
+            builder.Services.AddSingleton<ApiService>();
+            builder.Services.AddSingleton<AuthService>();
+            builder.Services.AddTransient<RegistrationPage>();
+            builder.Services.AddTransient<LoginPage>();
 
             builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
             builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
@@ -56,6 +62,7 @@ namespace AkySystem
             ServiceHelper.ServiceProvider = app.Services;
 
             return app;
+           
         }
     }
 }

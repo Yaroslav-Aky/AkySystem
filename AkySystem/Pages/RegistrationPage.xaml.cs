@@ -6,7 +6,6 @@ namespace AkySystem.Pages
     {
         private readonly AuthService _authService;
 
-        // DI-конструктор — DI сам передаст нужный сервис!
         public RegistrationPage(AuthService authService)
         {
             InitializeComponent();
@@ -15,32 +14,32 @@ namespace AkySystem.Pages
 
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            var login = LoginEntry.Text?.Trim();
-            var password = PasswordEntry.Text?.Trim();
+            string login = LoginEntry.Text?.Trim();
+            string password = PasswordEntry.Text?.Trim();
 
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
             {
-                await DisplayAlert("Ошибка", "Поля логина и пароля не должны быть пустыми.", "OK");
+                await DisplayAlert("Ошибка", "Введите логин и пароль.", "OK");
                 return;
             }
 
-            // Пытаемся зарегистрировать пользователя
-            var isRegistered = await _authService.Register(login, password);
+            var (isSuccess, message) = await _authService.RegisterUserAsync(login, password);
 
-            if (isRegistered)
+            if (isSuccess)
             {
-                await DisplayAlert("Успех", "Регистрация прошла успешно!", "ОК");
-                await Shell.Current.GoToAsync("//LoginPage"); // Перейти на страницу входа после регистрации
+                await DisplayAlert("Успешно", "Вы зарегистрированы!", "OK");
+                await Shell.Current.GoToAsync("//LoginPage");
             }
             else
             {
-                await DisplayAlert("Ошибка", "Пользователь с таким логином уже существует.", "OK");
+                await DisplayAlert("Ошибка регистрации", message, "OK");
             }
         }
-
-        private async void OnLoginClicked(object sender, EventArgs e)
+            private async void OnLoginClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginPage");
         }
+
     }
+
 }

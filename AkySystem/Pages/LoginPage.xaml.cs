@@ -1,5 +1,4 @@
 using AkySystem.Services;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace AkySystem.Pages
 {
@@ -7,7 +6,6 @@ namespace AkySystem.Pages
     {
         private readonly AuthService _authService;
 
-        // Теперь DI сам передаст сюда сервис при создании страницы
         public LoginPage(AuthService authService)
         {
             InitializeComponent();
@@ -21,11 +19,11 @@ namespace AkySystem.Pages
 
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
             {
-                await DisplayAlert("Ошибка", "Ой, ошибка =( Похоже, вы не указали логин и пароль", "OK");
+                await DisplayAlert("Ошибка", "Укажите логин и пароль", "OK");
                 return;
             }
 
-            var isLogged = await _authService.Login(login, password);
+            var (isLogged, message) = await _authService.LoginUserAsync(login, password);
 
             if (isLogged)
             {
@@ -33,7 +31,7 @@ namespace AkySystem.Pages
             }
             else
             {
-                await DisplayAlert("Ошибка", "Неправильный логин или пароль", "OK");
+                await DisplayAlert("Ошибка", $"Не удалось войти: {message}", "OK");
             }
         }
     }

@@ -1,42 +1,37 @@
-﻿using Microsoft.Maui.Storage;
-using AkySystem.Models;           // для User
-using System.Threading.Tasks;     // для Task
-using AkySystem.Services;         // для DatabaseService
+﻿using System.Threading.Tasks;
+using AkySystem.Services;
 
 namespace AkySystem.Services
 {
     public class AuthService
     {
-        private readonly DatabaseService _dbService;
+        private readonly ApiService _apiService;
 
-        public AuthService(DatabaseService dbService)
+        public AuthService(ApiService apiService)
         {
-            _dbService = dbService;
+            _apiService = apiService;
         }
 
-        public async Task<bool> Register(string username, string password)
+        // Регистрация пользователя на сервере
+        public async Task<(bool ok, string message)> RegisterUserAsync(string login, string password)
         {
-            var existingUser = await _dbService.GetUserAsync(username);
-            if (existingUser != null)
-                return false;
-
-            await _dbService.AddUserAsync(new User { Login = username, Password = password });
-            Microsoft.Maui.Storage.Preferences.Default.Set("is_registered", true);
-            Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", true);
-            return true;
+            var (ok, body) = await _apiService.RegisterUserAsync(login, password);
+            return (ok, body);
         }
 
-        public async Task<bool> Login(string login, string password)
+        // Попытка логина на сервере
+        public async Task<(bool ok, string message)> LoginUserAsync(string login, string password)
         {
-            var user = await _dbService.GetUserAsync(login);
-            if (user != null && user.Password == password)
+            var (ok, body) = await _apiService.LoginUserAsync(login, password);
+            if (ok)
             {
+                // При успехе входа можно сохранить флаг или токен, если нужно
                 Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", true);
-                return true;
             }
-            return false;
+            return (ok, body);
         }
 
+        // Выход из системы (опционально)
         public void Logout()
         {
             Microsoft.Maui.Storage.Preferences.Default.Set("is_logged_in", false);

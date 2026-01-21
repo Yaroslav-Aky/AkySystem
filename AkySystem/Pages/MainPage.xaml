@@ -27,15 +27,14 @@
             <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="15" RowSpacing="15">
 
                 <!-- Кнопка Перевод -->
-                <Button Grid.Row="0" Grid.Column="0"
-                        Text="Перевод"
-                        ImageSource="transfer_icon.png"
+                <Button Text="Перевод" Clicked="OnTransferClicked"
+                ImageSource="transfer_icon.png"
                         ContentLayout="Top,10"
                         HeightRequest="120"
                         Command="{Binding TransferCommand}"/>
 
                 <!-- Кнопка Магазин -->
-                <Button Grid.Row="0" Grid.Column="1"
+                <Button Grid.Row="0" Grid.Column="1" Clicked="OnShopClicked"
                         Text="Магазин"
                         ImageSource="shop_icon.png"
                         ContentLayout="Top,10"

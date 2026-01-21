@@ -1,7 +1,10 @@
 ﻿namespace AkySystem
 {
     public partial class App : Application
+
     {
+        public static AkySystem.Services.TransferService TransferService = new AkySystem.Services.TransferService();
+        public static string CurrentUser = "User1"; // или как у тебя логин хранится
         public App()
         {
             InitializeComponent();

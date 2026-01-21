@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AkySystem.Pages.TransferHistoryPage"
+             Title="История переводов">
+
+    <CollectionView x:Name="HistoryList">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame Margin="5" Padding="5" BorderColor="Purple" CornerRadius="8">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Amount}" FontSize="20" TextColor="Purple"/>
+                        <Label Text="{Binding Message}" FontSize="16"/>
+                        <Label Text="{Binding Date, StringFormat='{0:dd.MM.yy HH:mm}'}" FontSize="14" TextColor="Gray"/>
+                        <Label Text="{Binding FromToText}" FontSize="14" TextColor="Gray"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
